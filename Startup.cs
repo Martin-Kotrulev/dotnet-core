@@ -34,7 +34,7 @@ namespace WebApplicationBasic
         {
             // Add framework services.
             services.AddMvc();
-            services.AddDbContext<VegaDbContext>(
+            services.AddDbContext<AppDbContext>(
                 options => options.UseNpgsql(
                     connectionString: Configuration.GetConnectionString("Default")
                 )

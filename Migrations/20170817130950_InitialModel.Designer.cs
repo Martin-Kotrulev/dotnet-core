@@ -7,9 +7,9 @@ using vega.Persistence;
 
 namespace Vega.Migrations
 {
-    [DbContext(typeof(VegaDbContext))]
-    [Migration("20170816132041_SeedDatabase")]
-    partial class SeedDatabase
+    [DbContext(typeof(AppDbContext))]
+    [Migration("20170817130950_InitialModel")]
+    partial class InitialModel
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -46,7 +46,7 @@ namespace Vega.Migrations
 
                     b.HasIndex("MakeId");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("vega.Models.Model", b =>

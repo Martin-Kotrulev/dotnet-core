@@ -7,11 +7,10 @@ using vega.Persistence;
 
 namespace Vega.Migrations
 {
-    [DbContext(typeof(VegaDbContext))]
-    [Migration("20170816131502_ApplyRightConstraints")]
-    partial class ApplyRightConstraints
+    [DbContext(typeof(AppDbContext))]
+    partial class AppDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
@@ -46,7 +45,7 @@ namespace Vega.Migrations
 
                     b.HasIndex("MakeId");
 
-                    b.ToTable("Model");
+                    b.ToTable("Models");
                 });
 
             modelBuilder.Entity("vega.Models.Model", b =>

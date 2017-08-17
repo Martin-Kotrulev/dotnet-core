@@ -11,11 +11,11 @@ namespace vega.Controllers
 {
   public class MakesController : Controller
   {
-    private readonly VegaDbContext context;
+    private readonly AppDbContext context;
 
     private readonly IMapper mapper;
 
-    public MakesController(VegaDbContext context, IMapper mapper)
+    public MakesController(AppDbContext context, IMapper mapper)
     {
       this.context = context;
       this.mapper = mapper;
