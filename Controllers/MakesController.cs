@@ -32,5 +32,10 @@ namespace vega.Controllers
 
         return mapper.Map<List<Make>, List<MakeResource>>(makes);
     }
+
+    [HttpPost("add")]
+    public IActionResult Add() {
+      return BadRequest(ModelState);
+    }
   }
 }

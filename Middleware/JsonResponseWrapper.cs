@@ -35,9 +35,9 @@ namespace vega.Middleware
                 var bodyStream = new StreamReader(memoryStream).ReadToEnd();
                 var resultObj = JsonConvert.DeserializeObject(bodyStream);
 
-                System.Console.WriteLine(bodyStream.ToString());
-                // Send our modified content to the response body.
                 context.Response.ContentType = "application/json";
+               
+                // Send our modified content to the response body.
                 await context.Response.WriteAsync(
                     JsonConvert.SerializeObject(
                         BuildResponse(context.Response, resultObj),
