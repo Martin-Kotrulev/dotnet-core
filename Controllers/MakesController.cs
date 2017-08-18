@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using vega.Controllers.Resources;
-using vega.Models;
-using vega.Persistence;
+using App.Controllers.Resources;
+using App.Models;
+using App.Persistence;
 
-namespace vega.Controllers
+namespace App.Controllers
 {
   [Route("[controller]")]
   public class MakesController : Controller
@@ -26,6 +26,7 @@ namespace vega.Controllers
     [HttpGet("")]
     public async Task<IEnumerable<MakeResource>> GetAll()
     {
+        System.Console.WriteLine("get all");
         var makes = await context.Makes
             .Include(m => m.Models)
             .ToListAsync();
@@ -34,8 +35,10 @@ namespace vega.Controllers
     }
 
     [HttpPost("add")]
-    public IActionResult Add([FromQuery] string index) {
-      return BadRequest(ModelState);
+    public IActionResult Add(int id, [FromQuery] int index) {
+      System.Console.WriteLine(id);
+      System.Console.WriteLine(index);
+      return Ok();
     }
   }
 }

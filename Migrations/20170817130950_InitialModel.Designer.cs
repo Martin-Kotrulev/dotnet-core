@@ -3,9 +3,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using vega.Persistence;
+using App.Persistence;
 
-namespace Vega.Migrations
+namespace App.Migrations
 {
     [DbContext(typeof(AppDbContext))]
     [Migration("20170817130950_InitialModel")]

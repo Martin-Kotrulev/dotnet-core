@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 
-namespace vega.Middleware
+namespace App.Middleware
 {
     public static class JsonResponseWrapperExtension
     {

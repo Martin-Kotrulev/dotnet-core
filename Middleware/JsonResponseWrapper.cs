@@ -4,7 +4,7 @@ using Newtonsoft.Json;
 using System.IO;
 using Newtonsoft.Json.Serialization;
 
-namespace vega.Middleware
+namespace App.Middleware
 {
     public class JsonResponseWrapper
     {

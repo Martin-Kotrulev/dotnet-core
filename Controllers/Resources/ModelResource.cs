@@ -1,4 +1,4 @@
-namespace vega.Controllers.Resources
+namespace App.Controllers.Resources
 {
     public class ModelResource
     {
