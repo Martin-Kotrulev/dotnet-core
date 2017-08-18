@@ -34,7 +34,7 @@ namespace vega.Controllers
     }
 
     [HttpPost("add")]
-    public IActionResult Add() {
+    public IActionResult Add([FromQuery] string index) {
       return BadRequest(ModelState);
     }
   }
