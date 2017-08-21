@@ -16,10 +16,10 @@ namespace App.Services.Security.Extensions
             services.Configure<IdentityOptions>(options => 
             {
                 // Password settings
-                options.Password.RequireDigit = true;
+                options.Password.RequireDigit = false;
                 options.Password.RequiredLength = 8;
                 options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequireUppercase = true;
+                options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = false;
 
                 // Lockout settings
@@ -28,8 +28,8 @@ namespace App.Services.Security.Extensions
 
                 // Cookie settings
                 options.Cookies.ApplicationCookie.ExpireTimeSpan = TimeSpan.FromDays(150);
-                options.Cookies.ApplicationCookie.LoginPath = "/Account/LogIn";
-                options.Cookies.ApplicationCookie.LogoutPath = "/Account/LogOut";
+                options.Cookies.ApplicationCookie.LoginPath = "/account/login";
+                options.Cookies.ApplicationCookie.LogoutPath = "/account/logout";
 
                 // User settings
                 options.User.RequireUniqueEmail = true;
