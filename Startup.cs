@@ -15,6 +15,7 @@ using App.Middleware;
 using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
+using vega.Services.Security.Extensions;
 
 namespace WebApplicationBasic
 {
@@ -36,6 +37,7 @@ namespace WebApplicationBasic
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddIdentityService();
             services.AddMvc();
             services.AddDbContext<AppDbContext>(
                 options => options.UseNpgsql(
@@ -81,6 +83,8 @@ namespace WebApplicationBasic
             });
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
 
             app.UserJsonResponseWrapper();
             

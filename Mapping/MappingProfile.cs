@@ -1,6 +1,4 @@
 using AutoMapper;
-using App.Controllers.Resources;
-using App.Models;
 
 namespace App.Mapping
 {
@@ -8,8 +6,6 @@ namespace App.Mapping
     {
         public MappingProfile()
         {
-            CreateMap<Make, MakeResource>();
-            CreateMap<Model, ModelResource>();
         }
     }
 }
