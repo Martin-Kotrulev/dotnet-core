@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using App.Core.Models;
 
-namespace vega.Services.Security.Extensions
+namespace App.Services.Security.Extensions
 {
     public static class IdentityServiceExtension
     {

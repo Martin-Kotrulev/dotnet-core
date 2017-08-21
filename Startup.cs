@@ -15,7 +15,7 @@ using App.Middleware;
 using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
-using vega.Services.Security.Extensions;
+using App.Services.Security.Extensions;
 
 namespace WebApplicationBasic
 {
@@ -55,10 +55,12 @@ namespace WebApplicationBasic
 
             if (env.IsDevelopment())
             {
+                // Uncomment in case of webpack usage
+
                 //app.UseDeveloperExceptionPage();
-                app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
-                    HotModuleReplacement = true
-                });
+                // app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
+                //     HotModuleReplacement = true
+                // });
             }
 
             app.UseExceptionHandler(err => {
