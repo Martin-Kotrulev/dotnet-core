@@ -1,6 +1,8 @@
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using App.Controllers.Resources;
 using App.Core.Models;
+using App.Services.Security;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -10,51 +12,51 @@ namespace App.Controllers
 {
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _loginManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        
-        public AccountController(UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> loginManager,
-            RoleManager<IdentityRole> roleManager)
+        private readonly IAuthenticationService _authService; 
+        public AccountController(IAuthenticationService authService)
         {
-            _userManager = userManager;
-            _loginManager = loginManager;
-            _roleManager = roleManager;
+            _authService = authService;
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Register(RegisterResource resource)
+        public async Task<IActionResult> Register([FromBody] CredentialsResource credentials)
         {
             if (ModelState.IsValid) {
-                var user = new ApplicationUser() { UserName = resource.Username };
-                var result = await _userManager.CreateAsync(user, resource.Password);
+                var user = new ApplicationUser() { UserName = credentials.Email, Email = credentials.Email };
+                var result = await _authService.RegisterUserAsync(user, credentials.Password);
 
                 if (result.Succeeded) {
-                    System.Console.WriteLine("Registered!");
-                    return Ok();
+                    var token = await _authService.SignInUserAsync(credentials);
+                    
+                    return Ok(new ApiResponse(
+                        token,
+                        "User registered successfully."
+                    ));
                 }
 
-                return BadRequest(ModelState);
+                return BadRequest(new ApiResponse(result));
             }
 
-            return BadRequest(ModelState);
+            return BadRequest(new ApiResponse(ModelState));
         }
 
         [HttpPost]
         [AllowAnonymous]
-        public async Task<IActionResult> Login(RegisterResource resource)
+        public async Task<IActionResult> Login([FromBody] CredentialsResource credentials)
         {
-            System.Console.WriteLine(_userManager == null);
-            return Ok();
-        }
+            if (ModelState.IsValid) {
+                var token = await _authService.SignInUserAsync(credentials);
+                    
+                if ((token.AccessToken ?? token.IdToken) != null)
+                {
+                    return Ok(new ApiResponse(token, $"User {token.Username} logged successfully."));
+                }
 
-        [HttpPost]
-        public async Task<IActionResult> Logout(RegisterResource resource)
-        {
-            System.Console.WriteLine(_userManager == null);
-            return Ok();
+                return BadRequest(new ApiResponse(400, "Wrong username or password."));
+            }
+
+            return BadRequest(new ApiResponse(ModelState));
         }
     }
 }

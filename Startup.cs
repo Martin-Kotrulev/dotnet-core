@@ -16,6 +16,8 @@ using Microsoft.AspNetCore.Diagnostics;
 using Newtonsoft.Json;
 using Microsoft.AspNetCore.Http;
 using App.Services.Security.Extensions;
+using App.Config;
+using App.Services.Security;
 
 namespace WebApplicationBasic
 {
@@ -37,7 +39,9 @@ namespace WebApplicationBasic
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.Configure<JWTSettings>(Configuration.GetSection("JWTSettings"));
             services.AddIdentityService();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
             services.AddMvc();
             services.AddDbContext<AppDbContext>(
                 options => options.UseNpgsql(
@@ -88,7 +92,7 @@ namespace WebApplicationBasic
 
             app.UseIdentity();
 
-            app.UserJsonResponseWrapper();
+            //app.UserJsonResponseWrapper();
             
             app.UseMvc(routes =>
             {
