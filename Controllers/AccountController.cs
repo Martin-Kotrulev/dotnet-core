@@ -31,7 +31,7 @@ namespace App.Controllers
                     
                     return Ok(new ApiResponse(
                         token,
-                        "User registered successfully."
+                        $"User '{token.Username}' registered successfully."
                     ));
                 }
 
@@ -50,7 +50,7 @@ namespace App.Controllers
                     
                 if ((token.AccessToken ?? token.IdToken) != null)
                 {
-                    return Ok(new ApiResponse(token, $"User {token.Username} logged successfully."));
+                    return Ok(new ApiResponse(token, $"User '{token.Username}' logged successfully."));
                 }
 
                 return BadRequest(new ApiResponse(400, "Wrong username or password."));
